@@ -19,7 +19,7 @@ public class StreamingFacade {
         this.player = player;
     }
 
-    // ---------- Consulta ----------
+    // ---------- Consultation ----------
     public List<Music> findAll() {
         return unify(fonts.stream()
                 .flatMap(service -> service.listAll().stream())
@@ -52,7 +52,7 @@ public class StreamingFacade {
                 .filter(music -> Objects.equals(music.id(), id)).findFirst();
     }
 
-    // ---------- Execução ----------
+    // ---------- Runer ----------
     public void play(Music music) {
         player.playMusic(music);
     }
@@ -64,11 +64,9 @@ public class StreamingFacade {
 
     // ---------- Helpers ----------
     private List<Music> unify(List<Music> list) {
-        // Remove duplicatas por id; caso ids diferentes mas mesmo (titulo, artista, ano, genero), mantém primeiro
         Map<String, Music> porId = list.stream()
                 .collect(Collectors.toMap(Music::id, Function.identity(), (a, b) -> a, LinkedHashMap::new));
 
-        // Deduplicar por assinatura sem id (fallback)
         Map<String, Music> toSignature = new LinkedHashMap<>();
         for (Music music : porId.values()) {
             String signature = (music.title() + "|" + music.artist() + "|" + music.year() + "|" + music.genre()).toLowerCase();

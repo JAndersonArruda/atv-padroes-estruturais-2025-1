@@ -57,8 +57,8 @@ public class MainApp {
         System.out.println("Artistas mais tocados:");
         rankArtistas.forEach((k, v) -> System.out.println("- " + k + ": " + v));
 
-        Map<String, Integer> rankGeneros = contGenres.getRankingGenres();
+        Map<String, Integer> rankGenres = contGenres.getRankingGenres();
         System.out.println("Gêneros mais tocados:");
-        rankGeneros.forEach((k, v) -> System.out.println("- " + k + ": " + v));
+        rankGenres.forEach((k, v) -> System.out.println("- " + k + ": " + v));
     }
 }
